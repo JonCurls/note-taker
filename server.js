@@ -5,25 +5,22 @@ const app = express();
 let notes = require("./db/db.json");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
-// const apiRoutes = require("./routes/apiRoutes");
-// const htmlRoutes = require("./routes/htmlRoutes");
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// app.use("/api", apiRoutes);
-// app.use("/", htmlRoutes);
-
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
+// When user access notes page
 app.get("/api/notes", (req, res) => {
   res.json(notes);
 });
 
+// When user adds a new Task
 app.post("/api/notes", (req, res) => {
   var newNote = req.body;
   newNote.id = uuidv4();
@@ -39,6 +36,7 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
+// Catch-all get
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
