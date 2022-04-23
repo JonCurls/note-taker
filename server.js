@@ -22,21 +22,21 @@ app.get("/api/notes", (req, res) => {
 
 // When user adds a new Task
 app.post("/api/notes", (req, res) => {
-  var newNote = req.body;
+  let newNote = req.body;
   newNote.id = uuidv4();
-  res.sendFile(path.join(__dirname, "/db/db.json"));
+  res.sendFile(path.join(__dirname, "./db/db.json"));
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
     if (err) throw err;
     let newTask = JSON.parse(data);
     newTask.push(newNote);
     fs.writeFile("./db/db.json", JSON.stringify(newTask), "utf-8", (err) => {
       if (err) throw err;
-      console.log("success");
+      console.log("successfully added!");
     });
   });
 });
 
-// Catch-all get
+// Catch-all for non specific pages
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
