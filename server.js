@@ -2,12 +2,9 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const notes = require("./db/db.json");
+let notes = require("./db/db.json");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
-
-// const noteSave = require("./public/assets/js/index.js");
-// const getNotes = require("./public/assets/js/index.js");
 // const apiRoutes = require("./routes/apiRoutes");
 // const htmlRoutes = require("./routes/htmlRoutes");
 
