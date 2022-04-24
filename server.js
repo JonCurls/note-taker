@@ -17,13 +17,12 @@ app.get("/notes", (req, res) => {
 
 // When user access notes page
 app.get("/api/notes", (req, res) => {
-  res.json(notes);
+  res.sendFile(path.join(__dirname, "./db/db.json"));
+  let results = notes;
 });
 
 // When user adds a new Task
 app.post("/api/notes", (req, res) => {
-  //   console.log(newNote);
-  //   res.sendFile(path.join(__dirname, "./db/db.json"));
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) throw err;
     let newNote = req.body;
