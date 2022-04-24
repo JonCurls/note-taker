@@ -35,6 +35,7 @@ app.post("/api/notes", (req, res) => {
       console.log("successfully added!");
     });
   });
+  res.sendFile(path.join(__dirname, "./db/db.json"));
 });
 
 // Catch-all for non specific pages
